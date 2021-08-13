@@ -1,6 +1,6 @@
 # Genesis Parameters
 
-DESMOS will be running with the following parameters at genesis. Most of the parameters can be updated by using a `ParameterChangeProposal` in `Governance` module. Only changes of parameters from `Cosmos SDK` modules are listed below.
+DESMOS will be running with the following parameters at genesis. Most of the parameters can be updated by using a `ParameterChangeProposal` and the `x/gov` module. Below we list only the changes to the parameters from the  Cosmos SDK modules. All the other parameters values are going to be the default ones. 
 
 ## Base
 
