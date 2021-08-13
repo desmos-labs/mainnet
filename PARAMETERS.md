@@ -9,7 +9,7 @@ DESMOS will be running with the following parameters at genesis. Most of the par
 
 ## Consensus
 
-* `"max_gas": "100000000"`. Maximum gas per block is set to `100,000,000`. For default `200,000` gas per transaction, it should accept `500` transaction per block.
+* `"max_gas": "100000000"`. Maximum gas per block is set to `100,000,000`. Considering the default `200,000` gas per transaction, this means `500` transactions should be included inside each block.
 * `"max_age_duration": "1209600000000000"`. 2 weeks for double sign evidence.
 * `"max_age_num_blocks": "204670"`. This is calculated by `max_age_duration` / `5.91` which is the average block time on `morpheus-apollo-2` testnet.
 
