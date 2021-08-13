@@ -1,16 +1,16 @@
 {
-  "genesis_time": "2021-08-13T06:36:37.855911Z",
-  "chain_id": "test-chain-KLQonA",
+  "genesis_time": "2021-08-31T11:00:00Z",
+  "chain_id": "desmos-1",
   "initial_height": "1",
   "consensus_params": {
     "block": {
       "max_bytes": "22020096",
-      "max_gas": "-1",
+      "max_gas": "100000000",
       "time_iota_ms": "1000"
     },
     "evidence": {
-      "max_age_num_blocks": "100000",
-      "max_age_duration": "172800000000000",
+      "max_age_num_blocks": "204670",
+      "max_age_duration": "1209600000000000",
       "max_bytes": "1048576"
     },
     "validator": {
@@ -39,7 +39,34 @@
       },
       "balances": [],
       "supply": [],
-      "denom_metadata": []
+      "denom_metadata": [
+        {
+          "base": "udesmos",
+          "denom_units": [
+            {
+              "aliases": [
+                "microdesmos"
+              ],
+              "denom": "udesmos",
+              "exponent": 0
+            },
+            {
+              "aliases": [
+                "millidesmos"
+              ],
+              "denom": "mdesmos",
+              "exponent": 3
+            },
+            {
+              "aliases": [],
+              "denom": "desmos",
+              "exponent": 6
+            }
+          ],
+          "description": "The native staking token of the DESMOS.",
+          "display": "desmos"
+        }
+      ]
     },
     "capability": {
       "index": "1",
@@ -47,13 +74,13 @@
     },
     "crisis": {
       "constant_fee": {
-        "denom": "stake",
-        "amount": "1000"
+        "denom": "udesmos",
+        "amount": "13333000000"
       }
     },
     "distribution": {
       "params": {
-        "community_tax": "0.020000000000000000",
+        "community_tax": "0.200000000000000000",
         "base_proposer_reward": "0.010000000000000000",
         "bonus_proposer_reward": "0.040000000000000000",
         "withdraw_addr_enabled": true
@@ -84,14 +111,14 @@
       "deposit_params": {
         "min_deposit": [
           {
-            "denom": "stake",
-            "amount": "10000000"
+            "denom": "udesmos",
+            "amount": "1337000000"
           }
         ],
-        "max_deposit_period": "172800s"
+        "max_deposit_period": "259200s"
       },
       "voting_params": {
-        "voting_period": "172800s"
+        "voting_period": "604800s"
       },
       "tally_params": {
         "quorum": "0.334000000000000000",
@@ -135,12 +162,12 @@
         "annual_provisions": "0.000000000000000000"
       },
       "params": {
-        "mint_denom": "stake",
-        "inflation_rate_change": "0.130000000000000000",
-        "inflation_max": "0.200000000000000000",
-        "inflation_min": "0.070000000000000000",
-        "goal_bonded": "0.670000000000000000",
-        "blocks_per_year": "6311520"
+        "mint_denom": "udesmos",
+        "inflation_rate_change": "1.000000000000000000",
+        "inflation_max": "0.000000000000000000",
+        "inflation_min": "0.000000000000000000",
+        "goal_bonded": "0.800000000000000000",
+        "blocks_per_year": "5339695"
       }
     },
     "params": null,
@@ -182,22 +209,22 @@
     },
     "slashing": {
       "params": {
-        "signed_blocks_window": "100",
-        "min_signed_per_window": "0.500000000000000000",
-        "downtime_jail_duration": "600s",
+        "signed_blocks_window": "150000",
+        "min_signed_per_window": "0.050000000000000000",
+        "downtime_jail_duration": "1800s",
         "slash_fraction_double_sign": "0.050000000000000000",
-        "slash_fraction_downtime": "0.010000000000000000"
+        "slash_fraction_downtime": "0.000100000000000000"
       },
       "signing_infos": [],
       "missed_blocks": []
     },
     "staking": {
       "params": {
-        "unbonding_time": "1814400s",
+        "unbonding_time": "1209600s",
         "max_validators": 100,
         "max_entries": 7,
         "historical_entries": 10000,
-        "bond_denom": "stake"
+        "bond_denom": "udesmos"
       },
       "last_total_power": "0",
       "last_validator_powers": [],
