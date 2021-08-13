@@ -41,30 +41,30 @@
       "supply": [],
       "denom_metadata": [
         {
-          "base": "udesmos",
+          "base": "udsm",
           "denom_units": [
             {
               "aliases": [
                 "microdesmos"
               ],
-              "denom": "udesmos",
+              "denom": "udsm",
               "exponent": 0
             },
             {
               "aliases": [
                 "millidesmos"
               ],
-              "denom": "mdesmos",
+              "denom": "mdsm",
               "exponent": 3
             },
             {
               "aliases": [],
-              "denom": "desmos",
+              "denom": "dsm",
               "exponent": 6
             }
           ],
           "description": "The native staking token of the DESMOS.",
-          "display": "desmos"
+          "display": "DSM"
         }
       ]
     },
@@ -74,7 +74,7 @@
     },
     "crisis": {
       "constant_fee": {
-        "denom": "udesmos",
+        "denom": "udsm",
         "amount": "13333000000"
       }
     },
@@ -111,7 +111,7 @@
       "deposit_params": {
         "min_deposit": [
           {
-            "denom": "udesmos",
+            "denom": "udsm",
             "amount": "1337000000"
           }
         ],
@@ -162,11 +162,11 @@
         "annual_provisions": "0.000000000000000000"
       },
       "params": {
-        "mint_denom": "udesmos",
+        "mint_denom": "udsm",
         "inflation_rate_change": "1.000000000000000000",
         "inflation_max": "0.000000000000000000",
         "inflation_min": "0.000000000000000000",
-        "goal_bonded": "0.800000000000000000",
+        "goal_bonded": "0.900000000000000000",
         "blocks_per_year": "5339695"
       }
     },
@@ -224,7 +224,7 @@
         "max_validators": 100,
         "max_entries": 7,
         "historical_entries": 10000,
-        "bond_denom": "udesmos"
+        "bond_denom": "udsm"
       },
       "last_total_power": "0",
       "last_validator_powers": [],
