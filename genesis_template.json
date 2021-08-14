@@ -1,5 +1,5 @@
 {
-  "genesis_time": "2021-08-31T11:00:00Z",
+  "genesis_time": "2021-08-31T15:00:00Z",
   "chain_id": "desmos-1",
   "initial_height": "1",
   "consensus_params": {
@@ -45,14 +45,14 @@
           "denom_units": [
             {
               "aliases": [
-                "microdesmos"
+                "microdsm"
               ],
               "denom": "udsm",
               "exponent": 0
             },
             {
               "aliases": [
-                "millidesmos"
+                "millidsm"
               ],
               "denom": "mdsm",
               "exponent": 3
@@ -112,7 +112,7 @@
         "min_deposit": [
           {
             "denom": "udsm",
-            "amount": "1337000000"
+            "amount": "500000000"
           }
         ],
         "max_deposit_period": "259200s"

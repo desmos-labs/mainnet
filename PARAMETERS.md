@@ -23,7 +23,7 @@ DESMOS will be running with the following parameters at genesis. Most of the par
 
 ## Governance
 
-* `"min_deposit": 1337000000udesmos`. The minimum deposit to make a proposal turn into voting period will be `1337 DSM`.
+* `"min_deposit": 500000000udesmos`. The minimum deposit to make a proposal turn into voting period will be `500 DSM`.
 * `"max_deposit_period": "259200s"`. The maxmium deposit period for a proposal will be `259,200 seconds` which is `3 days`.
 * `"voting_period": "604800s"`. The voting period of a proposal will be `604,800 seconds` which is `7 days`.
 
