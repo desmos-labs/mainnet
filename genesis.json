@@ -48800,7 +48800,9 @@
       "supply": [],
       "denom_metadata": [
         {
+          "description": "The native staking token of the DESMOS.",
           "base": "udsm",
+          "display": "dsm",
           "denom_units": [
             {
               "aliases": [
@@ -48821,9 +48823,7 @@
               "denom": "dsm",
               "exponent": 6
             }
-          ],
-          "description": "The native staking token of the DESMOS.",
-          "display": "DSM"
+          ]
         }
       ]
     },
