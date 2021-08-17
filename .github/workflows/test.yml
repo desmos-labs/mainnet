@@ -36,7 +36,7 @@ jobs:
           chmod +x ./desmos
           ./desmos init test
 
-      - name: Check genesis validaty ✅
+      - name: Check genesis validity ✅
         run: |
           cp penultimate_genesis.json ~/.desmos/config/genesis.json
           cp -a gentxs/. ~/.desmos/config/gentx/
