@@ -42,7 +42,7 @@ jobs:
     name: Collect genesis test
     runs-on: ubuntu-latest
     needs:
-      - gentxs
+      - check-gentxs
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
