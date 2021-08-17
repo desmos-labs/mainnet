@@ -2,64 +2,10 @@ import csv
 import json
 import sys
 import iso8601
+from cosmos_types import *
 
 MONTH_IN_SEC: int = 2592000
 COIN_DENOM: str = 'udsm'
-
-
-class Coin:
-    """
-    Represent a single coin amount.
-    """
-
-    def __init__(self, amount: int):
-        self.amount = amount
-
-    def __eq__(self, other):
-        """Overrides the default implementation"""
-        if isinstance(other, Coin):
-            return self.amount == other.amount
-        return False
-
-    def is_zero(self) -> bool:
-        """
-        Tells whether this coin represents a zero amount.
-        :return: True iff the coin represents a zero amount.
-        """
-        return self.amount == 0
-
-    def to_json(self) -> dict:
-        """
-        Gets the JSON representation of this instance.
-        :return: A dictionary representing the JSON version of this instance.
-        """
-        return {
-            'amount': str(self.amount),
-            'denom': COIN_DENOM
-        }
-
-
-class Coins:
-    """
-    Represents a list of Coin.
-    """
-
-    def __init__(self, coins: [Coin]):
-        self.coins = coins
-
-    def is_zero(self) -> bool:
-        """
-        Tells whether this instance represents a zero amount.
-        :return: True iff this instance represents a zero amount.
-        """
-        return len(self.coins) == 0 or all(map(lambda coin: coin.is_zero(), self.coins))
-
-    def to_json(self) -> [dict]:
-        """
-        Gets the JSON representation of this instance.
-        :return: A dictionary representing the JSON version of this instance.
-        """
-        return list(map(lambda coin: coin.to_json(), self.coins))
 
 
 class Period:
@@ -88,33 +34,6 @@ class Period:
         return {
             'length': str(self.length),
             'amount': [self.amount.to_json()]
-        }
-
-
-class Balance:
-    """
-    Represents a single account balance.
-    """
-
-    def __init__(self, address: str, balance: Coins):
-        self.address = address
-        self.balance = balance
-
-    def is_zero(self) -> bool:
-        """
-        Tells whether this instance represents a zero amount.
-        :return: True iff this instance represents a zero amount.
-        """
-        return self.balance.is_zero()
-
-    def to_json(self) -> dict:
-        """
-        Gets the JSON representation of this instance.
-        :return: A dictionary representing the JSON version of this instance.
-        """
-        return {
-            'address': self.address,
-            'coins': self.balance.to_json()
         }
 
 
@@ -226,15 +145,16 @@ class Entry:
         if vested_33 > 0:
             # Append the first period for the 12th month
             vested_33_month_12 = int(vested_33 * 0.33)
-            periods.append(Period(Coin(vested_33_month_12), 12 * MONTH_IN_SEC))
+            periods.append(Period(Coin(vested_33_month_12, COIN_DENOM), 12 * MONTH_IN_SEC))
 
             # Append 11 periods for months 13 to 23 included
             vested_33_month_13_23 = int(vested_33 * 0.0558)
-            periods.extend(map(lambda x: Period(Coin(vested_33_month_13_23), 1 * MONTH_IN_SEC), list(range(13, 24))))
+            periods.extend(
+                map(lambda x: Period(Coin(vested_33_month_13_23, COIN_DENOM), 1 * MONTH_IN_SEC), list(range(13, 24))))
 
             # Append the last period for the 24th month
             vested_33_month_24 = vested_33 - vested_33_month_12 - (vested_33_month_13_23 * 11)
-            periods.append(Period(Coin(vested_33_month_24), 1 * MONTH_IN_SEC))
+            periods.append(Period(Coin(vested_33_month_24, COIN_DENOM), 1 * MONTH_IN_SEC))
 
         # Amount of tokens that will be vested:
         # - 50% at the end of the 24th month
@@ -244,15 +164,16 @@ class Entry:
         if vested_50 > 0:
             # Append the first period for the 24th month
             vested_50_month_24 = int(vested_50 * 0.5)
-            periods.append(Period(Coin(vested_50_month_24), 24 * MONTH_IN_SEC))
+            periods.append(Period(Coin(vested_50_month_24, COIN_DENOM), 24 * MONTH_IN_SEC))
 
             # Append 23 periods for month 25 to 47 included
             vested_50_month_25_47 = int(vested_50 * 0.0208)
-            periods.extend(map(lambda x: Period(Coin(vested_50_month_25_47), 1 * MONTH_IN_SEC), list(range(25, 48))))
+            periods.extend(
+                map(lambda x: Period(Coin(vested_50_month_25_47, COIN_DENOM), 1 * MONTH_IN_SEC), list(range(25, 48))))
 
             # Append the last period for the 48th month
             vested_50_month_48 = vested_50 - vested_50_month_24 - (vested_50_month_25_47 * 23)
-            periods.append(Period(Coin(vested_50_month_48), 1 * MONTH_IN_SEC))
+            periods.append(Period(Coin(vested_50_month_48, COIN_DENOM), 1 * MONTH_IN_SEC))
 
         # Amount of tokens that will be vested:
         # - 4.16% each month for 23 months
@@ -261,11 +182,12 @@ class Entry:
         if vested_uaf > 0:
             # Append 23 periods for month 1 to 23 included
             vested_uaf_month_1_23 = int(vested_uaf * 0.0416)
-            periods.extend(map(lambda x: Period(Coin(vested_uaf_month_1_23), 1 * MONTH_IN_SEC), list(range(1, 24))))
+            periods.extend(
+                map(lambda x: Period(Coin(vested_uaf_month_1_23, COIN_DENOM), 1 * MONTH_IN_SEC), list(range(1, 24))))
 
             # Append the last period for the 24th month
             vested_uaf_month_24 = vested_uaf - (vested_uaf_month_1_23 * 23)
-            periods.append(Period(Coin(vested_uaf_month_24), 1 * MONTH_IN_SEC))
+            periods.append(Period(Coin(vested_uaf_month_24, COIN_DENOM), 1 * MONTH_IN_SEC))
 
         # Amount of tokens that will be vested in the 4th year:
         # - 25% at end of 39th month
@@ -276,10 +198,10 @@ class Entry:
         if vested_entities > 0:
             amount = int(vested_entities * 0.25)
             periods.extend([
-                Period(Coin(amount), 39 * MONTH_IN_SEC),
-                Period(Coin(amount), 42 * MONTH_IN_SEC),
-                Period(Coin(amount), 45 * MONTH_IN_SEC),
-                Period(Coin(vested_entities - (amount * 3)), 48 * MONTH_IN_SEC),
+                Period(Coin(amount, COIN_DENOM), 39 * MONTH_IN_SEC),
+                Period(Coin(amount, COIN_DENOM), 42 * MONTH_IN_SEC),
+                Period(Coin(amount, COIN_DENOM), 45 * MONTH_IN_SEC),
+                Period(Coin(vested_entities - (amount * 3), COIN_DENOM), 48 * MONTH_IN_SEC),
             ])
 
         return periods
@@ -303,9 +225,9 @@ def read_csv(file_path: str) -> [Account]:
             entry = Entry(line)
             accounts.append(Account(
                 entry.get_address(),
-                Coins([Coin(entry.get_no_vested())]),
+                Coins([Coin(entry.get_no_vested(), COIN_DENOM)]),
                 entry.get_periods(),
-                Coins([Coin(entry.get_total())]),
+                Coins([Coin(entry.get_total(), COIN_DENOM)]),
             ))
 
     return accounts
@@ -333,7 +255,6 @@ def write_accounts(accounts: [Account], genesis_file_path: str):
         json.dump(genesis, genesis_file, indent=2)
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     args = sys.argv[1:]
     if len(args) == 0:
