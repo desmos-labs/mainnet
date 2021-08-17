@@ -32,6 +32,65 @@
       },
       "accounts": [
         {
+          "@type": "/cosmos.vesting.v1beta1.PeriodicVestingAccount",
+          "base_vesting_account": {
+            "base_account": {
+              "address": "desmos18vm7uv5dv9yx70jr8kynfpnzsek9k5scctxhl3",
+              "pub_key": null,
+              "account_number": "0",
+              "sequence": "0"
+            },
+            "original_vesting": [
+              {
+                "amount": "7499990000000",
+                "denom": "udsm"
+              }
+            ],
+            "delegated_free": [],
+            "delegated_vesting": [],
+            "end_time": "2081430000"
+          },
+          "start_time": "1630422000",
+          "vesting_periods": [
+            {
+              "length": "101088000",
+              "amount": [
+                {
+                  "amount": "1874997500000",
+                  "denom": "udsm"
+                }
+              ]
+            },
+            {
+              "length": "108864000",
+              "amount": [
+                {
+                  "amount": "1874997500000",
+                  "denom": "udsm"
+                }
+              ]
+            },
+            {
+              "length": "116640000",
+              "amount": [
+                {
+                  "amount": "1874997500000",
+                  "denom": "udsm"
+                }
+              ]
+            },
+            {
+              "length": "124416000",
+              "amount": [
+                {
+                  "amount": "1874997500000",
+                  "denom": "udsm"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "address": "desmos1fvhr4vygf462fsjs7d3ukza0c0svta9vupr3ch",
           "pub_key": null,
@@ -16681,7 +16740,7 @@
           "@type": "/cosmos.vesting.v1beta1.PeriodicVestingAccount",
           "base_vesting_account": {
             "base_account": {
-              "address": "desmos1xd409cjr2ajrxpjsk8tgym0qml83g2a3kmaz4a\u00dfs",
+              "address": "desmos1xd409cjr2ajrxpjsk8tgym0qml83g2a3kmaz4a",
               "pub_key": null,
               "account_number": "0",
               "sequence": "0"
@@ -51930,6 +51989,15 @@
       },
       "balances": [
         {
+          "address": "desmos18vm7uv5dv9yx70jr8kynfpnzsek9k5scctxhl3",
+          "coins": [
+            {
+              "amount": "10000000",
+              "denom": "udsm"
+            }
+          ]
+        },
+        {
           "address": "desmos1fvhr4vygf462fsjs7d3ukza0c0svta9vupr3ch",
           "coins": [
             {
@@ -52776,7 +52844,7 @@
           ]
         },
         {
-          "address": "desmos1xd409cjr2ajrxpjsk8tgym0qml83g2a3kmaz4a\u00dfs",
+          "address": "desmos1xd409cjr2ajrxpjsk8tgym0qml83g2a3kmaz4a",
           "coins": [
             {
               "amount": "10000000",

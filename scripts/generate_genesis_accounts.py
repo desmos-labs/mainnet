@@ -218,7 +218,6 @@ def read_csv(file_path: str) -> [Account]:
         csv_reader = csv.DictReader(csv_file)
 
         # Skip the first line as it contains the column names
-        next(csv_reader)
 
         # Read the lines
         for line in csv_reader:
