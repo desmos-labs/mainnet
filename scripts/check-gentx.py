@@ -54,9 +54,6 @@ if __name__ == '__main__':
     if len(args) == 0:
         raise Exception("Please provide the path to the gentxs folder")
 
-    if len(args) == 1:
-        raise Exception("Please provide the path to the genesis file")
-
     gentxs = parse_gentxs(args[0])
     for gentx in gentxs:
         check_self_delegation_validity(gentx.self_delegate_amount)
