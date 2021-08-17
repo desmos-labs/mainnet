@@ -42,11 +42,11 @@ class Account:
     Represents a single account.
     """
 
-    def __init__(self, address: str, balance: Coins, periods: [Period], total: Coins):
+    def __init__(self, address: str, balance: Coins, periods: [Period], total_vested: Coins):
         self.address = address
         self.balance = balance
         self.periods = periods
-        self.total = total
+        self.total_vested = total_vested
 
     def __eq__(self, other):
         """Overrides the default implementation"""
@@ -101,7 +101,7 @@ class Account:
                     "account_number": '0',
                     "sequence": '0'
                 },
-                'original_vesting': self.total.to_json(),
+                'original_vesting': self.total_vested.to_json(),
                 'delegated_free': [],
                 'delegated_vesting': [],
                 'end_time': str(start_time + self._get_end_time())
@@ -121,15 +121,17 @@ class Entry:
         self.investors_incentives = int(csv_row['Vesting Investors Incentives'])
         self.uaf = int(csv_row['Vesting UAF'])
         self.foundation_ventures = int(csv_row['Vesting Entities'])
-        self.teammates_advisors_early_supporters = int(csv_row['Vesting Teammates, Advisors, and Supporters'])
+        self.teammates_advisors_early_supporters = int(csv_row['Vesting Teammates/Advisors/Supporters'])
         self.no_vesting = int(csv_row['No Vesting'])
+        self.total_vested = int(csv_row['Total Vested'])
+        self.total_not_vested = int(csv_row['Total Not Vested'])
         self.total = int(csv_row['Total'])
 
     def get_address(self) -> str:
         return self.address
 
-    def get_total(self) -> int:
-        return self.total
+    def get_total_vested(self) -> int:
+        return self.total_vested
 
     def get_no_vested(self) -> int:
         return self.no_vesting
@@ -227,7 +229,7 @@ def read_csv(file_path: str) -> [Account]:
                 entry.get_address(),
                 Coins([Coin(entry.get_no_vested(), COIN_DENOM)]),
                 entry.get_periods(),
-                Coins([Coin(entry.get_total(), COIN_DENOM)]),
+                Coins([Coin(entry.get_total_vested(), COIN_DENOM)]),
             ))
 
     return accounts
