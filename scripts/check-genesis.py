@@ -10,11 +10,13 @@ def check_total_genesis_amount(genesis_file_path: str):
         accounts = genesis['app_state']['auth']['accounts']
         for account in accounts:
             if account['@type'] == '/cosmos.vesting.v1beta1.PeriodicVestingAccount':
-                total_amount += int(account['base_vesting_account']['original_vesting'][0]['amount'])
+                for coin in account['base_vesting_account']['original_vesting']:
+                    total_amount += int(coin['amount'])
 
         balances = genesis['app_state']['bank']['balances']
         for balance in balances:
-            total_amount += int(balance['coins'][0]['amount'])
+            for coin in balance['coins']:
+                total_amount += int(coin['amount'])
 
     if total_amount != 100_000_000_000_000:
         raise Exception(f"Amount is not 100MM DSM. Total amount: {total_amount}")

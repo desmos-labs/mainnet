@@ -124,8 +124,6 @@ class Entry:
         self.teammates_advisors_early_supporters = int(csv_row['Vesting Teammates/Advisors/Supporters'])
         self.no_vesting = int(csv_row['No Vesting'])
         self.total_vested = int(csv_row['Total Vested'])
-        self.total_not_vested = int(csv_row['Total Not Vested'])
-        self.total = int(csv_row['Total'])
 
     def get_address(self) -> str:
         return self.address
