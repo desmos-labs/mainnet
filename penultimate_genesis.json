@@ -48941,7 +48941,7 @@
         },
         "dtag": {
           "reg_ex": "^[A-Za-z0-9_]+$",
-          "min_length": "3",
+          "min_length": "6",
           "max_length": "30"
         },
         "bio": {
