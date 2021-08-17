@@ -22,9 +22,17 @@ class Coin:
         return False
 
     def is_zero(self) -> bool:
+        """
+        Tells whether this coin represents a zero amount.
+        :return: True iff the coin represents a zero amount.
+        """
         return self.amount == 0
 
     def to_json(self) -> dict:
+        """
+        Gets the JSON representation of this instance.
+        :return: A dictionary representing the JSON version of this instance.
+        """
         return {
             'amount': str(self.amount),
             'denom': COIN_DENOM
@@ -40,9 +48,17 @@ class Coins:
         self.coins = coins
 
     def is_zero(self) -> bool:
+        """
+        Tells whether this instance represents a zero amount.
+        :return: True iff this instance represents a zero amount.
+        """
         return len(self.coins) == 0 or all(map(lambda coin: coin.is_zero(), self.coins))
 
     def to_json(self) -> [dict]:
+        """
+        Gets the JSON representation of this instance.
+        :return: A dictionary representing the JSON version of this instance.
+        """
         return list(map(lambda coin: coin.to_json(), self.coins))
 
 
@@ -57,12 +73,18 @@ class Period:
         self.length = length
 
     def __eq__(self, other):
-        """Overrides the default implementation"""
+        """
+        Overrides the default implementation
+        """
         if isinstance(other, Period):
             return self.amount == other.amount and self.length == other.length
         return False
 
     def to_json(self):
+        """
+        Gets the JSON representation of this instance.
+        :return: A dictionary representing the JSON version of this instance.
+        """
         return {
             'length': str(self.length),
             'amount': [self.amount.to_json()]
@@ -79,9 +101,17 @@ class Balance:
         self.balance = balance
 
     def is_zero(self) -> bool:
+        """
+        Tells whether this instance represents a zero amount.
+        :return: True iff this instance represents a zero amount.
+        """
         return self.balance.is_zero()
 
     def to_json(self) -> dict:
+        """
+        Gets the JSON representation of this instance.
+        :return: A dictionary representing the JSON version of this instance.
+        """
         return {
             'address': self.address,
             'coins': self.balance.to_json()
@@ -105,10 +135,11 @@ class Account:
             return self.address == other.address and self.periods == other.periods
         return False
 
-    def get_address(self):
-        return self.address
-
     def get_balance(self) -> Balance:
+        """
+        Returns the balance associated to this account.
+        :return: The Balance instance representing the no-lockup balance associated to this account.
+        """
         return Balance(self.address, self.balance)
 
     def to_json(self, genesis_time: str) -> dict:
@@ -125,7 +156,7 @@ class Account:
     def _get_base_account(self):
         return {
             '@type': '/cosmos.auth.v1beta1.BaseAccount',
-            'address': self.get_address(),
+            'address': self.address,
             'pub_key': None,
             'account_number': '0',
             'sequence': '0'
@@ -146,7 +177,7 @@ class Account:
             '@type': '/cosmos.vesting.v1beta1.PeriodicVestingAccount',
             'base_vesting_account': {
                 'base_account': {
-                    "address": self.get_address(),
+                    "address": self.address,
                     "pub_key": None,
                     "account_number": '0',
                     "sequence": '0'
