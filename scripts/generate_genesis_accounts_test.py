@@ -6,16 +6,15 @@ if __name__ == '__main__':
 
 
 class TestEntry(unittest.TestCase):
-    def test_get_periods_vested_33(self):
+    def test_get_periods_investors_incentives(self):
         row = {
-            'address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
-            'angel': 200,
-            'seed': 200,
-            'primer': 200,
-            'validator': 200,
-            'genesis_invite': 200,
-            'teammate': 0,
-            'total': 0,
+            'Address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
+            'Vesting Investors Incentives': 1000,
+            'Vesting UAF': 0,
+            'Vesting Entities': 0,
+            'Vesting Teammates, Advisors, and Supporters': 0,
+            'No Vesting': 0,
+            'Total': 1000,
         }
         entry = genesis.Entry(row)
         periods = entry.get_periods()
@@ -38,16 +37,15 @@ class TestEntry(unittest.TestCase):
             genesis.Period(genesis.Coin(65), genesis.MONTH_IN_SEC),
         ])
 
-    def test_get_periods_vested_50(self):
+    def test_get_periods_teammates_advisors_early_supporters(self):
         row = {
-            'address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
-            'angel': 0,
-            'seed': 0,
-            'primer': 0,
-            'validator': 0,
-            'genesis_invite': 0,
-            'teammate': 1000,
-            'total': 0,
+            'Address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
+            'Vesting Investors Incentives': 0,
+            'Vesting UAF': 0,
+            'Vesting Entities': 0,
+            'Vesting Teammates, Advisors, and Supporters': 1000,
+            'No Vesting': 0,
+            'Total': 1000,
         }
         entry = genesis.Entry(row)
         periods = entry.get_periods()
@@ -80,4 +78,67 @@ class TestEntry(unittest.TestCase):
             genesis.Period(genesis.Coin(20), 1 * genesis.MONTH_IN_SEC),
             genesis.Period(genesis.Coin(20), 1 * genesis.MONTH_IN_SEC),
             genesis.Period(genesis.Coin(40), 1 * genesis.MONTH_IN_SEC),
+        ])
+
+    def test_get_periods_uaf(self):
+        row = {
+            'Address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
+            'Vesting Investors Incentives': 0,
+            'Vesting UAF': 1225,
+            'Vesting Entities': 0,
+            'Vesting Teammates, Advisors, and Supporters': 0,
+            'No Vesting': 0,
+            'Total': 1225,
+        }
+        entry = genesis.Entry(row)
+        periods = entry.get_periods()
+
+        # 1225 tokens to be vested over 24 months, 4.16% per month
+        # 50 + (2.08 * 23) + 2.16
+        self.assertListEqual(periods, [
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(50), 1 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(75), 1 * genesis.MONTH_IN_SEC),
+        ])
+
+    def test_get_periods_entities(self):
+        row = {
+            'Address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
+            'Vesting Investors Incentives': 0,
+            'Vesting UAF': 0,
+            'Vesting Entities': 1225,
+            'Vesting Teammates, Advisors, and Supporters': 0,
+            'No Vesting': 0,
+            'Total': 1225,
+        }
+        entry = genesis.Entry(row)
+        periods = entry.get_periods()
+
+        # 1225 tokens to be vested 25% at the end of the
+        self.assertListEqual(periods, [
+            genesis.Period(genesis.Coin(306), 39 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(306), 42 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(306), 45 * genesis.MONTH_IN_SEC),
+            genesis.Period(genesis.Coin(307), 48 * genesis.MONTH_IN_SEC),
         ])

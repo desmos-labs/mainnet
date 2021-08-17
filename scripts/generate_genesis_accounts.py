@@ -21,11 +21,29 @@ class Coin:
             return self.amount == other.amount
         return False
 
+    def is_zero(self) -> bool:
+        return self.amount == 0
+
     def to_json(self) -> dict:
         return {
             'amount': str(self.amount),
             'denom': COIN_DENOM
         }
+
+
+class Coins:
+    """
+    Represents a list of Coin.
+    """
+
+    def __init__(self, coins: [Coin]):
+        self.coins = coins
+
+    def is_zero(self) -> bool:
+        return len(self.coins) == 0 or all(map(lambda coin: coin.is_zero(), self.coins))
+
+    def to_json(self) -> [dict]:
+        return list(map(lambda coin: coin.to_json(), self.coins))
 
 
 class Period:
@@ -51,13 +69,33 @@ class Period:
         }
 
 
+class Balance:
+    """
+    Represents a single account balance.
+    """
+
+    def __init__(self, address: str, balance: Coins):
+        self.address = address
+        self.balance = balance
+
+    def is_zero(self) -> bool:
+        return self.balance.is_zero()
+
+    def to_json(self) -> dict:
+        return {
+            'address': self.address,
+            'coins': self.balance.to_json()
+        }
+
+
 class Account:
     """
     Represents a single account.
     """
 
-    def __init__(self, address: str, periods: [Period], total: Coin):
+    def __init__(self, address: str, balance: Coins, periods: [Period], total: Coins):
         self.address = address
+        self.balance = balance
         self.periods = periods
         self.total = total
 
@@ -70,11 +108,8 @@ class Account:
     def get_address(self):
         return self.address
 
-    def get_end_time(self) -> int:
-        end_time = 0
-        for period in self.periods:
-            end_time += period.length
-        return end_time
+    def get_balance(self) -> Balance:
+        return Balance(self.address, self.balance)
 
     def to_json(self, genesis_time: str) -> dict:
         """
@@ -82,10 +117,30 @@ class Account:
         :return: A dictionary containing this information as a JSON object.
         """
 
+        if len(self.periods) > 0:
+            return self._get_periodic_vesting_account(genesis_time)
+        else:
+            return self._get_base_account()
+
+    def _get_base_account(self):
+        return {
+            '@type': '/cosmos.auth.v1beta1.BaseAccount',
+            'address': self.get_address(),
+            'pub_key': None,
+            'account_number': '0',
+            'sequence': '0'
+        }
+
+    def _get_end_time(self) -> int:
+        end_time = 0
+        for period in self.periods:
+            end_time += period.length
+        return end_time
+
+    def _get_periodic_vesting_account(self, genesis_time: str):
         json_periods = []
         for period in self.periods:
             json_periods.append(period.to_json())
-
         start_time = int(iso8601.parse_date(genesis_time).timestamp())
         return {
             '@type': '/cosmos.vesting.v1beta1.PeriodicVestingAccount',
@@ -96,10 +151,10 @@ class Account:
                     "account_number": '0',
                     "sequence": '0'
                 },
-                'original_vesting': [self.total.to_json()],
+                'original_vesting': self.total.to_json(),
                 'delegated_free': [],
                 'delegated_vesting': [],
-                'end_time': str(start_time + self.get_end_time())
+                'end_time': str(start_time + self._get_end_time())
             },
             'start_time': str(start_time),
             'vesting_periods': json_periods,
@@ -112,20 +167,22 @@ class Entry:
     """
 
     def __init__(self, csv_row):
-        self.address = csv_row['address']
-        self.teammate = int(csv_row['teammate'])
-        self.angel = int(csv_row['angel'])
-        self.seed = int(csv_row['seed'])
-        self.primer = int(csv_row['primer'])
-        self.validator = int(csv_row['validator'])
-        self.genesis_invitation = int(csv_row['genesis_invite'])
-        self.total = int(csv_row['total'])
+        self.address = csv_row['Address']
+        self.investors_incentives = int(csv_row['Vesting Investors Incentives'])
+        self.uaf = int(csv_row['Vesting UAF'])
+        self.foundation_ventures = int(csv_row['Vesting Entities'])
+        self.teammates_advisors_early_supporters = int(csv_row['Vesting Teammates, Advisors, and Supporters'])
+        self.no_vesting = int(csv_row['No Vesting'])
+        self.total = int(csv_row['Total'])
 
     def get_address(self) -> str:
         return self.address
 
     def get_total(self) -> int:
         return self.total
+
+    def get_no_vested(self) -> int:
+        return self.no_vesting
 
     def get_periods(self) -> [Period]:
         periods = []
@@ -134,7 +191,7 @@ class Entry:
         # - 33% at end of 12th month
         # - 5.58% each month for 11 months
         # - 5.62% at the end of the 24th month
-        vested_33 = self.angel + self.seed + self.primer + self.validator + self.genesis_invitation
+        vested_33 = self.investors_incentives
         if vested_33 > 0:
             # Append the first period for the 12th month
             vested_33_month_12 = int(vested_33 * 0.33)
@@ -152,7 +209,7 @@ class Entry:
         # - 50% at the end of the 24th month
         # - 2.08% each month for 23 months
         # - 2.16% at the end of the 48th month
-        vested_50 = self.teammate
+        vested_50 = self.teammates_advisors_early_supporters
         if vested_50 > 0:
             # Append the first period for the 24th month
             vested_50_month_24 = int(vested_50 * 0.5)
@@ -165,6 +222,34 @@ class Entry:
             # Append the last period for the 48th month
             vested_50_month_48 = vested_50 - vested_50_month_24 - (vested_50_month_25_47 * 23)
             periods.append(Period(Coin(vested_50_month_48), 1 * MONTH_IN_SEC))
+
+        # Amount of tokens that will be vested:
+        # - 4.16% each month for 23 months
+        # - 4.32% at the 24th month
+        vested_uaf = self.uaf
+        if vested_uaf > 0:
+            # Append 23 periods for month 1 to 23 included
+            vested_uaf_month_1_23 = int(vested_uaf * 0.0416)
+            periods.extend(map(lambda x: Period(Coin(vested_uaf_month_1_23), 1 * MONTH_IN_SEC), list(range(1, 24))))
+
+            # Append the last period for the 24th month
+            vested_uaf_month_24 = vested_uaf - (vested_uaf_month_1_23 * 23)
+            periods.append(Period(Coin(vested_uaf_month_24), 1 * MONTH_IN_SEC))
+
+        # Amount of tokens that will be vested in the 4th year:
+        # - 25% at end of 39th month
+        # - 25% at end of 42th month
+        # - 25% at end of 45th month
+        # - 25% at end of 48th month
+        vested_entities = self.foundation_ventures
+        if vested_entities > 0:
+            amount = int(vested_entities * 0.25)
+            periods.extend([
+                Period(Coin(amount), 39 * MONTH_IN_SEC),
+                Period(Coin(amount), 42 * MONTH_IN_SEC),
+                Period(Coin(amount), 45 * MONTH_IN_SEC),
+                Period(Coin(vested_entities - (amount * 3)), 48 * MONTH_IN_SEC),
+            ])
 
         return periods
 
@@ -185,7 +270,12 @@ def read_csv(file_path: str) -> [Account]:
         # Read the lines
         for line in csv_reader:
             entry = Entry(line)
-            accounts.append(Account(entry.get_address(), entry.get_periods(), Coin(entry.get_total())))
+            accounts.append(Account(
+                entry.get_address(),
+                Coins([Coin(entry.get_no_vested())]),
+                entry.get_periods(),
+                Coins([Coin(entry.get_total())]),
+            ))
 
     return accounts
 
@@ -203,6 +293,10 @@ def write_accounts(accounts: [Account], genesis_file_path: str):
 
         json_accounts = list(map(lambda account: account.to_json(genesis_time), accounts))
         genesis['app_state']['auth']['accounts'] = json_accounts
+
+        non_zero_balances = filter(lambda account: not account.get_balance().is_zero(), accounts)
+        json_balances = list(map(lambda account: account.get_balance().to_json(), non_zero_balances))
+        genesis['app_state']['bank']['balances'] = json_balances
 
     with open(genesis_file_path, mode='w') as genesis_file:
         json.dump(genesis, genesis_file, indent=2)
