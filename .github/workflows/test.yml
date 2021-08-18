@@ -57,12 +57,10 @@ jobs:
         run: |
           cp penultimate_genesis.json ~/.desmos/config/genesis.json
           cp -a gentxs/. ~/.desmos/config/gentx/
-
-          ./desmos collect-gentxs > final-genesis.json
-          ./desmos collect-gentxs > final-genesis.json 2>&1
+          ./desmos collect-gentxs
 
       - name: Validate genesis ✅
         run: |
-          ./desmos validate-genesis final-genesis.json
+          ./desmos validate-genesis ~/.desmos/config/genesis.json
 
 
