@@ -29,13 +29,13 @@ def parse_gentxs(gentxs_folder_path: str) -> [GenTx]:
     """
     gentxs_files = glob.glob(f"{gentxs_folder_path}/*.json")
 
-    gentxs = []
+    txs = []
     for gentx_file_path in gentxs_files:
         with open(gentx_file_path, 'r') as gentx_file:
             gentx_json = json.load(gentx_file)
-            gentxs.append(GenTx.from_json(gentx_json))
+            txs.append(GenTx.from_json(gentx_json))
 
-    return gentxs
+    return txs
 
 
 def check_self_delegation_validity(self_delegate: Coin):
@@ -45,7 +45,7 @@ def check_self_delegation_validity(self_delegate: Coin):
 
     :param self_delegate: Self delegation amount to be checked.
     """
-    if self_delegate.amount > 10_000_000_000:
+    if self_delegate.get_amount() > 10_000_000_000:
         raise Exception('Self delegation amount exceeds 10.000 DSM')
 
 
