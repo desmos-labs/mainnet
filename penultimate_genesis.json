@@ -1,6 +1,6 @@
 {
   "genesis_time": "2021-08-31T15:00:00Z",
-  "chain_id": "desmos-1",
+  "chain_id": "desmos-mainnet-1",
   "initial_height": "1",
   "consensus_params": {
     "block": {
