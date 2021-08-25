@@ -5,7 +5,7 @@ DESMOS will be running with the following parameters at genesis. Most of the par
 ## Base
 
 * `"genesis_time": "2021-08-31T15:00:00Z"`. 31 Aug 2021 3pm UTC
-* `"chain_id": "desmos-1"`. The Chain ID of the DESMOS mainnet will be `desmos-1`.
+* `"chain_id": "desmos-mainnet-1"`. The Chain ID of the DESMOS mainnet will be `desmos-mainnet-1`.
 
 ## Consensus
 

@@ -63,4 +63,17 @@ jobs:
         run: |
           ./desmos validate-genesis ~/.desmos/config/genesis.json
 
+      - name: Start chain ⛓
+        run: |
+          ./desmos start > output.txt 2>&1 &
 
+      - name: Test liveness ✅
+        run: |
+          sleep 30
+          if [[ $(cat output.txt | grep "Genesis time is in the future. Sleeping until then...") ]]; then
+            echo "Chain starting"
+            exit 0
+          else
+            echo "Chain not started"
+            exit 1
+          fi
