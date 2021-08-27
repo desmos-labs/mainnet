@@ -56,3 +56,11 @@ The `inflation` will be computed based on the percentage of tokens delegated at 
 
 * `"unbonding_time": "1209600s"`. Unbonding period on `DESMOS` is set to `1209600 seconds` which is `14 days`.
 * `"bond_denom": "udsm"`. The bond denom is `udsm`. This is the smallest unit of the `DSM`.
+
+## Transfer
+
+* `"send_enabled": false` <sup>1</sup>
+* `"receive_enabled": false` <sup>1</sup>
+
+<sup>1</sup> Both the sending and receiving of tokens using IBC will be disabled at genesis. 
+We will enable them after the chain start with a governance proposal.  
