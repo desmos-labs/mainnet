@@ -9,7 +9,7 @@
       "time_iota_ms": "1000"
     },
     "evidence": {
-      "max_age_num_blocks": "max_age_num_blocks",
+      "max_age_num_blocks": "204670",
       "max_age_duration": "1209600000000000",
       "max_bytes": "1048576"
     },
