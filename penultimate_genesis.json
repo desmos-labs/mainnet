@@ -9,7 +9,7 @@
       "time_iota_ms": "1000"
     },
     "evidence": {
-      "max_age_num_blocks": "204670",
+      "max_age_num_blocks": "max_age_num_blocks",
       "max_age_duration": "1209600000000000",
       "max_bytes": "1048576"
     },
@@ -59217,8 +59217,8 @@
         },
         "oracle": {
           "script_id": "32",
-          "ask_count": "10",
-          "min_count": "6",
+          "ask_count": "5",
+          "min_count": "3",
           "prepare_gas": "50000",
           "execute_gas": "200000",
           "fee_payer": "desmos-ibc-profiles",
