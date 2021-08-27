@@ -31,9 +31,18 @@ DESMOS will be running with the following parameters at genesis. Most of the par
 
 * `"mint_denom": "udsm"`. The mint denom will be `udsm`. This is the smallest unit of the staking token `DSM`.
 * `"inflation_rate_change": "1.000000000000000000"`. Inflation change rate is set to `1` to have the optimum speed to make the inflation rate change to the target inflation.
-* `"inflation_max": "0.000000000000000000"` and `"inflation_min": "0.000000000000000000"`. Both parameters are set to `0` at genesis to avoid an imbalanced sudden change of token distribution at launch. These values will be changed by a `ParameterChangePropoal` right after launch. According to the parameters inside the _Governance_ module, the earliest time for the parameter change to happen will be 7 days after the genesis time. This period of zero inflation will give enough time for token holders to stake until inflation is turned on. The `inflation_max` will be set to `0.8` and `inflation_min` will be set to `0.4` as written in the whitepaper.
+* `"inflation": "0.000000000000000000"` <sup>1</sup>
+* `"inflation_max": "0.000000000000000000"` <sup>1</sup>
+* `"inflation_min": "0.000000000000000000"` <sup>1</sup>
 * `"goal_bonded": "0.9"`. We see staking ratio can reach over 82% on other networks. We are setting a higher `goal_bonded` to attract token holders to stake and incentivize early stakers.
 * `"blocks_per_year": "5339695"`. Based on `5.91 seconds` of average block time on `morpheus-apollo-2` testnet.
+
+<sup>1</sup> All these parameters are set to `0` at genesis to avoid an imbalanced sudden change of token distribution at launch. 
+These values will be changed by a `ParameterChangePropoal` right after launch.   
+According to the parameters inside the _Governance_ module, the earliest time for the parameter change to happen will be 7 days after the genesis time. 
+This period of zero inflation will give enough time for token holders to stake until inflation is turned on.   
+The `inflation_max` will be set to `0.8` and `inflation_min` will be set to `0.4` as written in the whitepaper.
+The `inflation` will be computed based on the percentage of tokens delegated at that time.
 
 ## Slashing
 
