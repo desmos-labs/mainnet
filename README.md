@@ -100,5 +100,7 @@ We will enable them after the chain start with a governance proposal.
 While connecting to the Desmos mainnet, you can use the following seed nodes to bootstrap your node:
 
 ```sh
-T.B.D
+9bde6ab4e0e00f721cc3f5b4b35f3a0e8979fab5@seed-1.mainnet.desmos.network
+5c86915026093f9a2f81e5910107cf14676b48fc@seed-2.mainnet.desmos.network
+45105c7241068904bdf5a32c86ee45979794637f@seed-3.mainnet.desmos.network
 ```
