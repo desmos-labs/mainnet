@@ -32,7 +32,7 @@ The result genesis state is the one named [`genesis.json`](genesis.json) and has
 
 ```shell
 $ jq -S -c -M '' genesis.json | shasum -a 256
-9e5d67484c23e5fc8c35e6aa14d0b17bf74b9dbf97b024391b7992d9df57db82  -
+9b0f233e0e6f5ca0190468f43e655a07431ef9acc0c0124789bb094b9340e6a4  -
 ```
 
 #### Parameters
@@ -45,6 +45,9 @@ All the other parameters values are going to be the default ones.
 #### Base
 * `"genesis_time": "2021-08-31T15:00:00Z"`. 31 Aug 2021 3pm UTC
 * `"chain_id": "desmos-mainnet-1"`. The Chain ID of the DESMOS mainnet will be `desmos-mainnet-1`.
+
+#### Auth
+* `"tx_sig_limit": "10"`. Maximum signatures per transaction is increased to `10`.
 
 #### Consensus
 * `"max_gas": "100000000"`. Maximum gas per block is set to `100,000,000`. Considering the default `200,000` gas per transaction, this means `500` transactions should be included inside each block.
