@@ -4,21 +4,36 @@ class Coin:
     """
 
     def __init__(self, amount: int, denom: str):
-        self.amount = amount
-        self.denom = denom
+        self._amount = amount
+        self._denom = denom
 
     def __eq__(self, other):
         """Overrides the default implementation"""
         if isinstance(other, Coin):
-            return self.amount == other.amount
+            return self._denom == other._denom and self._amount == other._amount
         return False
+
+    def get_amount(self) -> int:
+        return self._amount
+
+    def get_denom(self) -> str:
+        return self._denom
+
+    def add_int(self, value: int):
+        """
+        Adds a given value to this Coin's amount.
+        :param value: The integer amount to be added.
+        :return: Returns a new Coin having the same denom but value that is equal to the sum of the current value
+         plus the given amount.
+        """
+        return Coin(self._amount + value, self._denom)
 
     def is_zero(self) -> bool:
         """
         Tells whether this coin represents a zero amount.
         :return: True iff the coin represents a zero amount.
         """
-        return self.amount == 0
+        return self._amount == 0
 
     def to_json(self) -> dict:
         """
@@ -26,8 +41,8 @@ class Coin:
         :return: A dictionary representing the JSON version of this instance.
         """
         return {
-            'amount': str(self.amount),
-            'denom': str(self.denom)
+            'amount': str(self._amount),
+            'denom': str(self._denom)
         }
 
     @staticmethod
@@ -41,21 +56,27 @@ class Coins:
     """
 
     def __init__(self, coins: [Coin]):
-        self.coins = coins
+        self._coins = coins
+
+    def __eq__(self, other):
+        """Overrides the default implementation"""
+        if isinstance(other, Coins):
+            return self._coins == other._coins
+        return False
 
     def is_zero(self) -> bool:
         """
         Tells whether this instance represents a zero amount.
         :return: True iff this instance represents a zero amount.
         """
-        return len(self.coins) == 0 or all(map(lambda coin: coin.is_zero(), self.coins))
+        return len(self._coins) == 0 or all(map(lambda coin: coin.is_zero(), self._coins))
 
     def to_json(self) -> [dict]:
         """
         Gets the JSON representation of this instance.
         :return: A dictionary representing the JSON version of this instance.
         """
-        return list(map(lambda coin: coin.to_json(), self.coins))
+        return list(map(lambda coin: coin.to_json(), self._coins))
 
     @staticmethod
     def from_json(coins: [dict]):
@@ -68,15 +89,15 @@ class Balance:
     """
 
     def __init__(self, address: str, balance: Coins):
-        self.address = address
-        self.balance = balance
+        self._address = address
+        self._balance = balance
 
     def is_zero(self) -> bool:
         """
         Tells whether this instance represents a zero amount.
         :return: True iff this instance represents a zero amount.
         """
-        return self.balance.is_zero()
+        return self._balance.is_zero()
 
     def to_json(self) -> dict:
         """
@@ -84,8 +105,8 @@ class Balance:
         :return: A dictionary representing the JSON version of this instance.
         """
         return {
-            'address': self.address,
-            'coins': self.balance.to_json()
+            'address': self._address,
+            'coins': self._balance.to_json()
         }
 
     @staticmethod
