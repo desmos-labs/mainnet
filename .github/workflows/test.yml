@@ -2,6 +2,9 @@ name: Test
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   check-genesis:
@@ -19,48 +22,30 @@ jobs:
       - name: Check genesis validity ✅
         run: |
           pip3 install -r scripts/requirements.txt
-          python scripts/check-genesis.py "$GITHUB_WORKSPACE/penultimate_genesis.json"
-
-  check-gentxs:
-    name: Check gentxs validity
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
-
-      - name: Setup Python 🐍
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9.5'
-
-      - name: Check gentxs validity ✅
-        run: |
-          pip3 install -r scripts/requirements.txt
-          python scripts/check-gentx.py "$GITHUB_WORKSPACE/gentxs"
-
-  collect-genesis:
-    name: Collect genesis test
-    runs-on: ubuntu-latest
-    needs:
-      - check-gentxs
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2
+          python scripts/check-genesis.py "$GITHUB_WORKSPACE/genesis.json"
 
       - name: Setup Desmos 💿
         run: |
-          wget -O desmos https://github.com/desmos-labs/desmos/releases/download/v1.0.0/desmos-1.0.0-linux-amd64
+          wget -O desmos https://github.com/desmos-labs/desmos/releases/download/v1.0.1/desmos-1.0.1-linux-amd64
           chmod +x ./desmos
           ./desmos init test
-
-      - name: Collect genesis transactions 📮
-        run: |
-          cp penultimate_genesis.json ~/.desmos/config/genesis.json
-          cp -a gentxs/. ~/.desmos/config/gentx/
-          ./desmos collect-gentxs
+          cp genesis.json ~/.desmos/config/genesis.json
 
       - name: Validate genesis ✅
         run: |
           ./desmos validate-genesis ~/.desmos/config/genesis.json
 
+      - name: Start chain ⛓
+        run: |
+          ./desmos start > output.txt 2>&1 &
 
+      - name: Test liveness ✅
+        run: |
+          sleep 30
+          if [[ $(cat output.txt | grep "Genesis time is in the future. Sleeping until then...") ]]; then
+            echo "Chain starting"
+            exit 0
+          else
+            echo "Chain not started"
+            exit 1
+          fi

@@ -80,6 +80,66 @@ class TestEntry(unittest.TestCase):
             Period(Coin(40, COIN_DENOM), 1 * MONTH_IN_SEC),
         ])
 
+    def test_get_periods_investor_and_teammate(self):
+        row = {
+            'Address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
+            'Vesting Investors Incentives': 1000,
+            'Vesting UAF': 0,
+            'Vesting Entities': 0,
+            'Vesting Teammates/Advisors/Supporters': 1000,
+            'No Vesting': 0,
+            'Total': 2000,
+        }
+        entry = Entry(row)
+        periods = entry.get_periods()
+
+        # 1000 tokens to be vested using the formula -> 33 [12] + (5.58 * 11) + 5.62 [24]
+        # 1000 tokens to be vested using the formula -> 50 [24] + (2.08 * 23) + 2.16 [48]
+        self.assertListEqual(periods, [
+            Period(Coin(330, COIN_DENOM), 12 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(55, COIN_DENOM), 1 * MONTH_IN_SEC),
+
+            # The 24th month has both:
+            # - 5.62% of the 1000 tokens as an investor
+            # - 50% of the 1000 tokens as a teammate
+            Period(Coin(65 + 500, COIN_DENOM), 1 * MONTH_IN_SEC),
+
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(20, COIN_DENOM), 1 * MONTH_IN_SEC),
+            Period(Coin(40, COIN_DENOM), 1 * MONTH_IN_SEC),
+        ])
+
     def test_get_periods_uaf(self):
         row = {
             'Address': 'desmos1kztpzafhwx7ymv65fw79cqhyz07fes6hxfvfm9',
@@ -138,9 +198,9 @@ class TestEntry(unittest.TestCase):
         # 1225 tokens to be vested 25% at the end of the
         self.assertListEqual(periods, [
             Period(Coin(306, COIN_DENOM), 39 * MONTH_IN_SEC),
-            Period(Coin(306, COIN_DENOM), 42 * MONTH_IN_SEC),
-            Period(Coin(306, COIN_DENOM), 45 * MONTH_IN_SEC),
-            Period(Coin(307, COIN_DENOM), 48 * MONTH_IN_SEC),
+            Period(Coin(306, COIN_DENOM), 3 * MONTH_IN_SEC),
+            Period(Coin(306, COIN_DENOM), 3 * MONTH_IN_SEC),
+            Period(Coin(307, COIN_DENOM), 3 * MONTH_IN_SEC),
         ])
 
     def test_convert_entry(self):
