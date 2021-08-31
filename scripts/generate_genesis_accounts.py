@@ -4,7 +4,7 @@ import sys
 import iso8601
 from cosmos_types import *
 
-MONTH_IN_SEC: int = 2592000
+MONTH_IN_SEC: int = 2629743
 COIN_DENOM: str = 'udsm'
 
 
@@ -25,6 +25,14 @@ class Period:
         if isinstance(other, Period):
             return self._amount == other._amount and self._length == other._length
         return False
+
+    def add_amount(self, amount: int):
+        """
+        Adds a given amount to this period's amount.
+        :param amount: integer amount to be added.
+        :return: A new Period having the amount that is equals to this period's amount plus the given amount.
+        """
+        return Period(self._amount.add_int(amount), self._length)
 
     def to_json(self):
         """
@@ -169,9 +177,15 @@ class Entry:
         # - 2.16% at the end of the 48th month
         vested_50 = self._teammates_advisors_early_supporters
         if vested_50 > 0:
-            # Append the first period for the 24th month
             vested_50_month_24 = int(vested_50 * 0.5)
-            periods.append(Period(Coin(vested_50_month_24, COIN_DENOM), 24 * MONTH_IN_SEC))
+
+            if self._investors_incentives > 0:
+                # The user has some tokens also as an investor.
+                # This means we need to merge together the 24th period
+                periods[-1] = periods[-1].add_amount(vested_50_month_24)
+            else:
+                # Append the first period for the 24th month
+                periods.append(Period(Coin(vested_50_month_24, COIN_DENOM), 24 * MONTH_IN_SEC))
 
             # Append 23 periods for month 25 to 47 included
             vested_50_month_25_47 = int(vested_50 * 0.0208)
@@ -206,9 +220,9 @@ class Entry:
             amount = int(vested_entities * 0.25)
             periods.extend([
                 Period(Coin(amount, COIN_DENOM), 39 * MONTH_IN_SEC),
-                Period(Coin(amount, COIN_DENOM), 42 * MONTH_IN_SEC),
-                Period(Coin(amount, COIN_DENOM), 45 * MONTH_IN_SEC),
-                Period(Coin(vested_entities - (amount * 3), COIN_DENOM), 48 * MONTH_IN_SEC),
+                Period(Coin(amount, COIN_DENOM), 3 * MONTH_IN_SEC),
+                Period(Coin(amount, COIN_DENOM), 3 * MONTH_IN_SEC),
+                Period(Coin(vested_entities - (amount * 3), COIN_DENOM), 3 * MONTH_IN_SEC),
             ])
 
         return periods
