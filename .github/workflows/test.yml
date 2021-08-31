@@ -2,6 +2,9 @@ name: Test
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   check-genesis:
@@ -19,7 +22,7 @@ jobs:
       - name: Check genesis validity ✅
         run: |
           pip3 install -r scripts/requirements.txt
-          python scripts/check-genesis.py "$GITHUB_WORKSPACE/penultimate_genesis.json"
+          python scripts/check-genesis.py "$GITHUB_WORKSPACE/genesis.json"
 
   check-gentxs:
     name: Check gentxs validity
@@ -55,7 +58,7 @@ jobs:
 
       - name: Collect genesis transactions 📮
         run: |
-          cp penultimate_genesis.json ~/.desmos/config/genesis.json
+          cp genesis.json ~/.desmos/config/genesis.json
           cp -a gentxs/. ~/.desmos/config/gentx/
           ./desmos collect-gentxs
 
