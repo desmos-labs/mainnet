@@ -32,7 +32,7 @@ The result genesis state is the one named [`genesis.json`](genesis.json) and has
 
 ```shell
 $ jq -S -c -M '' genesis.json | shasum -a 256
-4417f328ceb340c3fd6724174d0b4ad7ef1a27624b0401a853453ec8d699faf4  -
+619c9462ccd9045522300c5ce9e7f4662cac096eed02ef0535cca2a6826074c4  -
 ```
 
 #### Parameters
