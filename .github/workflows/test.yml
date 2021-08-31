@@ -73,7 +73,7 @@ jobs:
       - name: Test liveness ✅
         run: |
           sleep 30
-          if [[ $(cat output.txt | grep "Genesis time is in the future. Sleeping until then...") ]]; then
+          if [[ $(cat output.txt | grep "Reconnecting to peer") ]]; then
             echo "Chain starting"
             exit 0
           else
