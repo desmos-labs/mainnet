@@ -2,6 +2,9 @@ name: Test
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   check-genesis:
@@ -19,7 +22,7 @@ jobs:
       - name: Check genesis validity ✅
         run: |
           pip3 install -r scripts/requirements.txt
-          python scripts/check-genesis.py "$GITHUB_WORKSPACE/penultimate_genesis.json"
+          python scripts/check-genesis.py "$GITHUB_WORKSPACE/genesis.json"
 
   check-gentxs:
     name: Check gentxs validity
@@ -55,7 +58,7 @@ jobs:
 
       - name: Collect genesis transactions 📮
         run: |
-          cp penultimate_genesis.json ~/.desmos/config/genesis.json
+          cp genesis.json ~/.desmos/config/genesis.json
           cp -a gentxs/. ~/.desmos/config/gentx/
           ./desmos collect-gentxs
 
@@ -63,4 +66,17 @@ jobs:
         run: |
           ./desmos validate-genesis ~/.desmos/config/genesis.json
 
+      - name: Start chain ⛓
+        run: |
+          ./desmos start > output.txt 2>&1 &
 
+      - name: Test liveness ✅
+        run: |
+          sleep 30
+          if [[ $(cat output.txt | grep "Reconnecting to peer") ]]; then
+            echo "Chain starting"
+            exit 0
+          else
+            echo "Chain not started"
+            exit 1
+          fi
