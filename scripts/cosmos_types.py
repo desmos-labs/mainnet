@@ -10,7 +10,7 @@ class Coin:
     def __eq__(self, other):
         """Overrides the default implementation"""
         if isinstance(other, Coin):
-            return self._amount == other._amount
+            return self._denom == other._denom and self._amount == other._amount
         return False
 
     def get_amount(self) -> int:
@@ -18,6 +18,15 @@ class Coin:
 
     def get_denom(self) -> str:
         return self._denom
+
+    def add_int(self, value: int):
+        """
+        Adds a given value to this Coin's amount.
+        :param value: The integer amount to be added.
+        :return: Returns a new Coin having the same denom but value that is equal to the sum of the current value
+         plus the given amount.
+        """
+        return Coin(self._amount + value, self._denom)
 
     def is_zero(self) -> bool:
         """
