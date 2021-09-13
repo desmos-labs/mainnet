@@ -7,5 +7,4 @@ https://explorer.desmos.network
 https://docs.desmos.network/
 
 ### Discord server
-
 https://discord.com/invite/J6VsHDT
