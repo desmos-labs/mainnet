@@ -2,6 +2,7 @@
 
 ### Explorer
 https://explorer.desmos.network
+https://ping.pub/desmos
 
 ### Documentation
 https://docs.desmos.network/
