@@ -106,4 +106,5 @@ While connecting to the Desmos mainnet, you can use the following seed nodes to 
 9bde6ab4e0e00f721cc3f5b4b35f3a0e8979fab5@seed-1.mainnet.desmos.network
 5c86915026093f9a2f81e5910107cf14676b48fc@seed-2.mainnet.desmos.network
 45105c7241068904bdf5a32c86ee45979794637f@seed-3.mainnet.desmos.network
+b9ae3a5871e3d9699f339b0af2e38f6095491ab3@desmos-seed.artifact-staking.io:26656
 ```
