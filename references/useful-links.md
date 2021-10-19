@@ -5,7 +5,8 @@ https://explorer.desmos.network
 
 ### Community Explorers
 
-https://desmos.skynetexplorers.com
+* https://desmos.skynetexplorers.com
+* https://ping.pub/desmos
 
 ### Documentation
 https://docs.desmos.network/
