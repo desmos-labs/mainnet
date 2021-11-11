@@ -43,8 +43,8 @@ Below we list only the changes to the parameters from the Cosmos SDK modules.
 All the other parameters values are going to be the default ones. 
 
 #### Base
-* `"genesis_time": "2021-08-31T15:00:00Z"`. 31 Aug 2021 3pm UTC
-* `"chain_id": "desmos-mainnet-1"`. The Chain ID of the DESMOS mainnet will be `desmos-mainnet-1`.
+* `"genesis_time": "2021-08-31T16:15:00Z"`. 31 Aug 2021 4:15pm UTC
+* `"chain_id": "desmos-mainnet"`. The Chain ID of the DESMOS mainnet will be `desmos-mainnet`.
 
 #### Auth
 * `"tx_sig_limit": "10"`. Maximum signatures per transaction is increased to `10`.
