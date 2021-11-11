@@ -1,0 +1,8 @@
+{
+  "binaries": {
+    "darwin/amd64": "https://github.com/desmos-labs/desmos/releases/download/v2.3.0-mainnet/desmos-2.3.0-mainnet-darwin-amd64?checksum=sha256:d3e027d1859f3198de6d5f3f50e3cd10c62c05739a92fbf5904e66efff9be12e",
+    "linux/amd64": "https://github.com/desmos-labs/desmos/releases/download/v2.3.0-mainnet/desmos-2.3.0-mainnet-linux-amd64?checksum=sha256:5af7b849533c50183f59e4be013f4b21c4379121c6215b55b1b80864d6cd924b",
+    "linux/arm64": "https://github.com/desmos-labs/desmos/releases/download/v2.3.0-mainnet/desmos-2.3.0-mainnet-linux-arm64?checksum=sha256:47574adf6b31a0497a9d443120138ce50a009a8ed1dc4408df28f915828962ac",
+    "windows/amd64": "https://github.com/desmos-labs/desmos/releases/download/v2.3.0-mainnet/desmos-2.3.0-mainnet-windows-amd64.exe?checksum=sha256:3cd92ad3d41bdb9f756e8fd412963cb059477c7fc2a62ce45bdb6ee46793e229"
+  }
+}
