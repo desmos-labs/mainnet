@@ -9,7 +9,7 @@ In here you will find the description and motivation of the various on-chain par
 You can also check for the used genesis state as well as get all the info about the version of Desmos that has been used to launch the mainnet.
 
 ## Binary version
-The used Desmos version to start the mainnet is the following: 
+The Desmos version used to start the mainnet is the following: 
 
 ```shell
 $ desmos version --long
@@ -24,6 +24,16 @@ To checkout this version run:
 ```
 git checkout tags/v1.0.1
 ```
+
+## State sync 
+Please note that if you want to use the state sync option to create a new validator node, 
+you will have to choose the following Desmos versions based on the state sync height you choose: 
+
+|  State sync height  | Desmos version | How to checkout the tag    |
+|:-------------------:|:--------------:|:---------------------------|
+|    `0 - 1149679`    |    `v1.0.1`    | `git checkout tags/v1.0.1` |
+| `1149680 - 1347304` |    `v2.3.0`    | `git checkout tags/v2.3.0` |
+|     `> 1347305`     |    `v2.3.1`    | `git checkout tags/v2.3.1` |
 
 ## Genesis file 
 The mainnet genesis file has been generated using the genesis state and transactions present inside the [`data` folder](data).  
