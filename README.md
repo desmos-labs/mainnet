@@ -1,5 +1,3 @@
-
-
 [![Website](.img/cover.jpg)](https://desmos.network)
 
 # Desmos Mainnet
@@ -42,7 +40,7 @@ The result genesis state is the one named [`genesis.json`](genesis.json) and has
 
 ```shell
 $ jq -S -c -M '' genesis.json | shasum -a 256
-619c9462ccd9045522300c5ce9e7f4662cac096eed02ef0535cca2a6826074c4  -
+9b0f233e0e6f5ca0190468f43e655a07431ef9acc0c0124789bb094b9340e6a4  -
 ```
 
 #### Parameters
@@ -53,8 +51,8 @@ Below we list only the changes to the parameters from the Cosmos SDK modules.
 All the other parameters values are going to be the default ones. 
 
 #### Base
-* `"genesis_time": "2021-08-31T16:15:00Z"`. 31 Aug 2021 4:15pm UTC
-* `"chain_id": "desmos-mainnet"`. The Chain ID of the DESMOS mainnet will be `desmos-mainnet`.
+* `"genesis_time": "2021-08-31T15:00:00Z"`. 31 Aug 2021 3pm UTC
+* `"chain_id": "desmos-mainnet-1"`. The Chain ID of the DESMOS mainnet will be `desmos-mainnet-1`.
 
 #### Auth
 * `"tx_sig_limit": "10"`. Maximum signatures per transaction is increased to `10`.
