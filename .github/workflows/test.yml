@@ -50,25 +50,25 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
 
-      - name: Setup Desmos 💿
+      - name: Setup Canine 💿
         run: |
-          wget -O desmos https://github.com/desmos-labs/desmos/releases/download/v1.0.0/desmos-1.0.0-linux-amd64
-          chmod +x ./desmos
-          ./desmos init test
+          wget -O canine https://github.com/JackalLabs/canine-chain/releases/download/v0.0.0-alpha.2/canined-Linux
+          chmod +x ./canine
+          ./canine init test
 
       - name: Collect genesis transactions 📮
         run: |
-          cp genesis.json ~/.desmos/config/genesis.json
-          cp -a gentxs/. ~/.desmos/config/gentx/
-          ./desmos collect-gentxs
+          cp genesis.json ~/.canine/config/genesis.json
+          cp -a gentxs/. ~/.canine/config/gentx/
+          ./canine collect-gentxs
 
       - name: Validate genesis ✅
         run: |
-          ./desmos validate-genesis ~/.desmos/config/genesis.json
+          ./canine validate-genesis ~/.canine/config/genesis.json
 
       - name: Start chain ⛓
         run: |
-          ./desmos start > output.txt 2>&1 &
+          ./canine start > output.txt 2>&1 &
 
       - name: Test liveness ✅
         run: |

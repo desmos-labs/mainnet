@@ -1,4 +1,3 @@
-[![Website](.img/cover.jpg)](https://desmos.network)
 
 # Desmos Mainnet
 This is the official repository used to launch the first Desmos mainnet. 
