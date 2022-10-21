@@ -37,7 +37,6 @@ jobs:
       - name: Download Canine 💿
         run: |
           git clone https://github.com/JackalLabs/canine-chain.git
-          git checkout woof-4
       - name: Install Canine 💿
         working-directory: ./canine-chain
         run: |
