@@ -52,23 +52,24 @@ jobs:
 
       - name: Setup Canine 💿
         run: |
-          wget -O canine https://github.com/JackalLabs/canine-chain/releases/download/v0.0.0-alpha.2/canined-Linux
-          chmod +x ./canine
-          ./canine init test
+          git clone https://github.com/JackalLabs/canine-chain.git
+          git checkout woof-4
+          make install
+          canine init test
 
       - name: Collect genesis transactions 📮
         run: |
           cp genesis.json ~/.canine/config/genesis.json
           cp -a gentxs/. ~/.canine/config/gentx/
-          ./canine collect-gentxs
+          canine collect-gentxs
 
       - name: Validate genesis ✅
         run: |
-          ./canine validate-genesis ~/.canine/config/genesis.json
+          canine validate-genesis ~/.canine/config/genesis.json
 
       - name: Start chain ⛓
         run: |
-          ./canine start > output.txt 2>&1 &
+          canine start > output.txt 2>&1 &
 
       - name: Test liveness ✅
         run: |
