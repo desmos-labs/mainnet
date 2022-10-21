@@ -41,21 +41,21 @@ jobs:
         working-directory: ./canine-chain
         run: |
           git checkout woof-4
-          make install
-          canined init test
+          make build
+          ./build/canined init test
       - name: Collect genesis transactions 📮
         run: |
           cp genesis.json ~/.canine/config/genesis.json
           cp -a gentxs/. ~/.canine/config/gentx/
-          canined collect-gentxs
+          ./canine-chain/build/canined collect-gentxs
 
       - name: Validate genesis ✅
         run: |
-          canined validate-genesis ~/.canine/config/genesis.json
+          ./canine-chain/build/canined validate-genesis ~/.canine/config/genesis.json
 
       - name: Start chain ⛓
         run: |
-          canined start > output.txt 2>&1 &
+          ./canine-chain/build/canined start > output.txt 2>&1 &
 
       - name: Test liveness ✅
         run: |
