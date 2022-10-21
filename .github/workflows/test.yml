@@ -38,7 +38,9 @@ jobs:
         run: |
           git clone https://github.com/JackalLabs/canine-chain.git
           git checkout woof-4
+          cd canine-chain
           make install
+          cd ../
           canine init test
 
       - name: Collect genesis transactions 📮
