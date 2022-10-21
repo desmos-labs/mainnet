@@ -42,20 +42,20 @@ jobs:
         run: |
           git checkout woof-4
           make install
-          canine init test
+          canined init test
       - name: Collect genesis transactions 📮
         run: |
           cp genesis.json ~/.canine/config/genesis.json
           cp -a gentxs/. ~/.canine/config/gentx/
-          canine collect-gentxs
+          canined collect-gentxs
 
       - name: Validate genesis ✅
         run: |
-          canine validate-genesis ~/.canine/config/genesis.json
+          canined validate-genesis ~/.canine/config/genesis.json
 
       - name: Start chain ⛓
         run: |
-          canine start > output.txt 2>&1 &
+          canined start > output.txt 2>&1 &
 
       - name: Test liveness ✅
         run: |
