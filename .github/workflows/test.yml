@@ -34,15 +34,16 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
 
-      - name: Setup Canine 💿
+      - name: Download Canine 💿
         run: |
           git clone https://github.com/JackalLabs/canine-chain.git
           git checkout woof-4
-          cd canine-chain
+      - name: Install Canine 💿
+        working-directory: ./canine-chain
+        run: |
+          git checkout woof-4
           make install
-          cd ../
           canine init test
-
       - name: Collect genesis transactions 📮
         run: |
           cp genesis.json ~/.canine/config/genesis.json
