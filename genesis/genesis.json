@@ -51,7 +51,12 @@
           ]
         }
       ],
-      "supply": [],
+      "supply": [
+        {
+          "denom": "ujkl",
+          "amount": "2000000000"
+        }
+      ],
       "denom_metadata": []
     },
     "capability": {
