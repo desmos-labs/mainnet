@@ -26,7 +26,7 @@ jobs:
           python scripts/check-gentx.py "$GITHUB_WORKSPACE/gentxs"
       - uses: actions/upload-artifact@v3
         with:
-          name: genesis/genesis.json
+          name: genesis.json
           path: genesis/genesis.json
 
         
