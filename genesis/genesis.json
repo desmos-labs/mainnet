@@ -54,7 +54,7 @@
           "coins": [
             {
               "denom": "ujkl",
-              "amount": "25000000000"
+              "amount": "2000000000"
             }
           ]
         }
@@ -62,7 +62,7 @@
       "supply": [
         {
           "denom": "ujkl",
-          "amount": "25000000000"
+          "amount": "2000000000"
         }
       ],
       "denom_metadata": []
