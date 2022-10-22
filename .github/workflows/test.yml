@@ -50,15 +50,15 @@ jobs:
           canined init node
           cp genesis/genesis.json ~/.canine/config/genesis.json
           cp -a gentxs/. ~/.canine/config/gentx/
-          ./canine-chain/build/canined collect-gentxs
+          canined collect-gentxs
 
       - name: Validate genesis ✅
         run: |
-          ./canine-chain/build/canined validate-genesis ~/.canine/config/genesis.json
+          canined validate-genesis ~/.canine/config/genesis.json
 
       - name: Start chain ⛓
         run: |
-          ./canine-chain/build/canined start > output.txt 2>&1 &
+          canined start > output.txt 2>&1 &
 
       - name: Test liveness ✅
         run: |
