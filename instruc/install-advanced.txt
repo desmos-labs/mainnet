@@ -17,6 +17,6 @@ install chain:
 
 git clone https://github.com/JackalLabs/canine-chain
 cd canine-chain
-git switch woof-4
+git checkout v1.0.0
 
 make install
