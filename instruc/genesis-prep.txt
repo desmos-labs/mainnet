@@ -6,7 +6,7 @@ canined init $MONIKER --chain-id=$CHAIN
 
 canined keys add $WALLETALIAS
 
-wget -O ~/.canine/config/genesis.json https://raw.githubusercontent.com/JackalLabs/canine-mainnet-genesis/master/genesis.json
+wget -O ~/.canine/config/genesis.json https://raw.githubusercontent.com/JackalLabs/canine-mainnet-genesis/main/genesis/genesis.json
 
 canined add-genesis-account $(canined keys show -a $WALLETALIAS) 2000000000ujkl
 
