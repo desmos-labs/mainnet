@@ -21,10 +21,14 @@ jobs:
           python-version: '3.9.5'
 
       - name: Check gentxs validity ✅
-        uses: actions/upload-artifact@v3
         run: |
           pip3 install -r scripts/requirements.txt
           python scripts/check-gentx.py "$GITHUB_WORKSPACE/gentxs"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: genesis/genesis.json
+          path: genesis/genesis.json
+
         
 
   collect-genesis:
