@@ -36,7 +36,7 @@ def parse_gentxs(gentxs_folder_path: str) -> [GenTx]:
         with open(gentx_file_path, 'r') as gentx_file:
             gentx_json = json.load(gentx_file)
             address = gentx_json['body']['messages'][0]['delegator_address']
-            genesis["app_state"]["bank"]["balances"] = {
+            gen["app_state"]["bank"]["balances"] = {
                 "address": address,
                 "coins": [
                     {
