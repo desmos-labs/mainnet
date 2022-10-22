@@ -30,7 +30,15 @@
         "sig_verify_cost_ed25519": "590",
         "sig_verify_cost_secp256k1": "1000"
       },
-      "accounts": []
+      "accounts": [
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "jkl16pen46ezev66s5wqxesj8lexk7ny58vy4qwyzv",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        }
+      ]
     },
     "authz": {
       "authorization": []
@@ -97,16 +105,12 @@
       "evidence": []
     },
     "feegrant": {
-      "allowances": [],
-      "free_messages": []
+      "allowances": []
     },
     "filetree": {
       "params": {},
       "filesList": [],
-      "pubkeyList": [],
-      "tracker": {
-        "trackingNumber": "0"
-      }
+      "pubkeyList": []
     },
     "genutil": {
       "gen_txs": []
@@ -192,15 +196,6 @@
         "mintDenom": "ujkl"
       }
     },
-    "lp": {
-      "params": {
-        "MinInitPoolDeposit": "2",
-        "MaxPoolDenomCount": 2,
-        "LPTokenUnit": 6
-      },
-      "lPoolList": [],
-      "lProviderRecordList": []
-    },
     "notifications": {
       "params": {},
       "notificationsList": [],
@@ -250,7 +245,8 @@
       "providersList": [],
       "payBlocksList": [],
       "clientUsageList": [],
-      "straysList": []
+      "straysList": [],
+      "fidCidList": []
     },
     "transfer": {
       "port_id": "transfer",
@@ -266,7 +262,8 @@
       "params": {
         "code_upload_access": {
           "permission": "Everybody",
-          "address": ""
+          "address": "",
+          "addresses": []
         },
         "instantiate_default_permission": "Everybody"
       },
