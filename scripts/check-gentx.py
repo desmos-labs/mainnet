@@ -28,14 +28,25 @@ def parse_gentxs(gentxs_folder_path: str) -> [GenTx]:
     :return: A list of GenTx objects containing each one the data about a single genesis transaction.
     """
     gentxs_files = glob.glob(f"{gentxs_folder_path}/*.json")
-
-    txs = []
-    for gentx_file_path in gentxs_files:
-        with open(gentx_file_path, 'r') as gentx_file:
-            gentx_json = json.load(gentx_file)
-            txs.append(GenTx.from_json(gentx_json))
-
-    return txs
+    with open("genesis/genesis.json", 'rw') as genesis:
+        gen = json.load(genesis)
+        txs = []
+        for gentx_file_path in gentxs_files:
+            with open(gentx_file_path, 'r') as gentx_file:
+                gentx_json = json.load(gentx_file)
+                address = gentx_json['body']['messages'][0]['delegator_address']
+                genesis["app_state"]["bank"]["balances"] = {
+                    "address": address,
+                    "coins": [
+                        {
+                            "denom": "ujkl",
+                            "amount": "1666666666"
+                        }
+                    ]
+                }
+                txs.append(GenTx.from_json(gentx_json))
+        json.dump(gen, genesis, indent=4)
+        return txs
 
 
 def check_self_delegation_validity(self_delegate: Coin):
