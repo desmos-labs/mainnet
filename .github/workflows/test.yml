@@ -64,7 +64,7 @@ jobs:
         run: |
           sleep 30
           cat output.txt
-          if [[ $(cat output.txt | grep "Reconnecting to peer") ]]; then
+          if [[ $(cat output.txt | grep "Genesis time is in the future") ]]; then
             echo "Chain starting"
             exit 0
           else
