@@ -1,0 +1,22 @@
+install gcc/make:
+
+sudo apt install build-essential
+
+install go:
+
+curl --output go1.18.4.linux-amd64.tar.gz https://dl.google.com/go/go1.18.4.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf $HOME/go1.18.4.linux-amd64.tar.gz
+
+nano ~/.profile:
+
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+source ~/.profile
+
+install chain:
+
+git clone https://github.com/JackalLabs/canine-chain
+cd canine-chain
+git switch woof-4
+
+make install

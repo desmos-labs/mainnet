@@ -1,5 +1,5 @@
 {
-  "genesis_time": "2022-10-20T0:00:00.0Z",
+  "genesis_time": "2022-10-26T16:00:00.0Z",
   "chain_id": "canine-1",
   "initial_height": "1",
   "consensus_params": {
@@ -56,7 +56,7 @@
     },
     "distribution": {
       "params": {
-        "community_tax": "0.020000000000000000",
+        "community_tax": "0.010000000000000000",
         "base_proposer_reward": "0.010000000000000000",
         "bonus_proposer_reward": "0.040000000000000000",
         "withdraw_addr_enabled": true
@@ -105,13 +105,13 @@
         "min_deposit": [
           {
             "denom": "ujkl",
-            "amount": "10000000"
+            "amount": "1000000000"
           }
         ],
         "max_deposit_period": "172800s"
       },
       "voting_params": {
-        "voting_period": "172800s"
+        "voting_period": "432000s"
       },
       "tally_params": {
         "quorum": "0.334000000000000000",
@@ -202,7 +202,7 @@
     },
     "slashing": {
       "params": {
-        "signed_blocks_window": "100",
+        "signed_blocks_window": "4800",
         "min_signed_per_window": "0.500000000000000000",
         "downtime_jail_duration": "600s",
         "slash_fraction_double_sign": "0.050000000000000000",
@@ -213,7 +213,7 @@
     },
     "staking": {
       "params": {
-        "unbonding_time": "1814400s",
+        "unbonding_time": "1209600s",
         "max_validators": 100,
         "max_entries": 7,
         "historical_entries": 10000,

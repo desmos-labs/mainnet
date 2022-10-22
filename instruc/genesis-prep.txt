@@ -1,0 +1,25 @@
+CHAIN="canine-1"
+WALLETALIAS="REPLACE_ME"
+MONIKER="REPLACE_ME"
+
+canined init $MONIKER --chain-id=$CHAIN
+
+canined keys add $WALLETALIAS
+
+canined add-genesis-account $(canined keys show -a $WALLETALIAS) 250000000ujkl
+
+canined gentx $WALLETALIAS 1666666666ujkl \
+--chain-id=$CHAIN \
+--moniker="$MONIKER" \
+--commission-max-change-rate=0.01 \
+--commission-max-rate=0.20 \
+--commission-rate=0.05 \
+--details="REPLACE_ME" \
+--security-contact="REPLACE_ME" \
+--website="REPLACE_ME"
+
+Copy the contents of ${HOME}/.canine/config/gentx/gentx-XXXXXXXX.json. (direct download of the file is best for this)
+Rename the file to gentx-{{VALIDATOR_NAME}}.json
+Fork this repository
+Add above gentx- to the gentxs folder
+Commit and submit Pull Request (please ask for help if unsure how)
