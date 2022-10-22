@@ -40,23 +40,8 @@
         "send_enabled": [],
         "default_send_enabled": true
       },
-      "balances": [
-        {
-          "address": "jkl16pen46ezev66s5wqxesj8lexk7ny58vy4qwyzv",
-          "coins": [
-            {
-              "denom": "ujkl",
-              "amount": "2000000000"
-            }
-          ]
-        }
-      ],
-      "supply": [
-        {
-          "denom": "ujkl",
-          "amount": "2000000000"
-        }
-      ],
+      "balances": [],
+      "supply": [],
       "denom_metadata": []
     },
     "capability": {
@@ -97,16 +82,12 @@
       "evidence": []
     },
     "feegrant": {
-      "allowances": [],
-      "free_messages": []
+      "allowances": []
     },
     "filetree": {
       "params": {},
       "filesList": [],
-      "pubkeyList": [],
-      "tracker": {
-        "trackingNumber": "0"
-      }
+      "pubkeyList": []
     },
     "genutil": {
       "gen_txs": []
@@ -192,15 +173,6 @@
         "mintDenom": "ujkl"
       }
     },
-    "lp": {
-      "params": {
-        "MinInitPoolDeposit": "2",
-        "MaxPoolDenomCount": 2,
-        "LPTokenUnit": 6
-      },
-      "lPoolList": [],
-      "lProviderRecordList": []
-    },
     "notifications": {
       "params": {},
       "notificationsList": [],
@@ -250,7 +222,8 @@
       "providersList": [],
       "payBlocksList": [],
       "clientUsageList": [],
-      "straysList": []
+      "straysList": [],
+      "fidCidList": []
     },
     "transfer": {
       "port_id": "transfer",
@@ -266,7 +239,8 @@
       "params": {
         "code_upload_access": {
           "permission": "Everybody",
-          "address": ""
+          "address": "",
+          "addresses": []
         },
         "instantiate_default_permission": "Everybody"
       },
