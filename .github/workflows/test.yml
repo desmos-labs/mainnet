@@ -63,6 +63,7 @@ jobs:
       - name: Test liveness ✅
         run: |
           sleep 30
+          cat output.txt
           if [[ $(cat output.txt | grep "Reconnecting to peer") ]]; then
             echo "Chain starting"
             exit 0
