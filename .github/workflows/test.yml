@@ -42,26 +42,23 @@ jobs:
 
       - name: Download Canine 💿
         run: |
-          git clone https://github.com/JackalLabs/canine-chain.git
-      - name: Install Canine 💿
-        working-directory: ./canine-chain
-        run: |
-          git checkout woof-4
-          make build
-          ./build/canined init test
+          sudo wget -O /usr/local/bin/canined https://github.com/JackalLabs/canine-chain/releases/download/v1.0.0/canined-Linux
+          sudo chmod +x /usr/local/bin/canined
+          sudo wget -O /lib/libwasmvm.x86_64.so https://github.com/CosmWasm/wasmvm/raw/v1.1.1/internal/api/libwasmvm.x86_64.so
       - name: Collect genesis transactions 📮
         run: |
+          canined init node
           cp genesis/genesis.json ~/.canine/config/genesis.json
           cp -a gentxs/. ~/.canine/config/gentx/
-          ./canine-chain/build/canined collect-gentxs
+          canined collect-gentxs
 
       - name: Validate genesis ✅
         run: |
-          ./canine-chain/build/canined validate-genesis ~/.canine/config/genesis.json
+          canined validate-genesis ~/.canine/config/genesis.json
 
       - name: Start chain ⛓
         run: |
-          ./canine-chain/build/canined start > output.txt 2>&1 &
+          canined start > output.txt 2>&1 &
 
       - name: Test liveness ✅
         run: |

@@ -40,8 +40,23 @@
         "send_enabled": [],
         "default_send_enabled": true
       },
-      "balances": [],
-      "supply": [],
+      "balances": [
+        {
+          "address": "jkl16pen46ezev66s5wqxesj8lexk7ny58vy4qwyzv",
+          "coins": [
+            {
+              "denom": "ujkl",
+              "amount": "2000000000"
+            }
+          ]
+        }
+      ],
+      "supply": [
+        {
+          "denom": "ujkl",
+          "amount": "2000000000"
+        }
+      ],
       "denom_metadata": []
     },
     "capability": {
