@@ -45,7 +45,9 @@ jobs:
           ./build/canined init test
       - name: Collect genesis transactions 📮
         run: |
-          cp genesis.json ~/.canine/config/genesis.json
+          export ADDRESS=$(grep -o 'jkl1.\{38\}')
+          sed -i "s/\"balances\": \[\],/\"balances\": \[{\"address\": \"$ADDRESS\",\"coins\": [{\"denom\": \"ujkl\",\"amount\": \"500000000\"}]}\],/" genesis/genesis.json
+          cp genesis/genesis.json ~/.canine/config/genesis.json
           cp -a gentxs/. ~/.canine/config/gentx/
           ./canine-chain/build/canined collect-gentxs
 
