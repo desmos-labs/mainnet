@@ -103,10 +103,7 @@
     "filetree": {
       "params": {},
       "filesList": [],
-      "pubkeyList": [],
-      "tracker": {
-        "trackingNumber": "0"
-      }
+      "pubkeyList": []
     },
     "genutil": {
       "gen_txs": []
