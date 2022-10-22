@@ -2,10 +2,10 @@
 The below directions require Ubuntu installed as your OS.
 
 Install canined on your machine:
-sudo wget -O ~/bin/canined https://github.com/JackalLabs/canine-chain/releases/download/v1.0.0/canined-Linux
+sudo wget -O /usr/local/bin/canined https://github.com/JackalLabs/canine-chain/releases/download/v1.0.0/canined-Linux
 
 Grant execute permission:
-sudo chmod +x ~/bin/canined
+sudo chmod +x /usr/local/bin/canined
 
 Install libwasmvm:
 sudo wget -O /lib/libwasmvm.x86_64.so https://github.com/CosmWasm/wasmvm/raw/v1.1.1/internal/api/libwasmvm.x86_64.so
