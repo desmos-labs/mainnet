@@ -2,7 +2,7 @@
 The below directions require Ubuntu installed as your OS.
 
 Install canined on your machine:
-sudo wget -O /usr/local/bin/canined https://github.com/JackalLabs/canine-chain/releases/download/v1.0.0/canined-Linux
+sudo wget -O /usr/local/bin/canined https://github.com/JackalLabs/canine-chain/releases/download/v1.1.0/canined-Linux
 
 Grant execute permission:
 sudo chmod +x /usr/local/bin/canined
