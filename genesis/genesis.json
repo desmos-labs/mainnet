@@ -14,9 +14,8 @@
       "max_bytes": "1048576"
     },
     "validator": {
-      "pub_key_types": [
-        "ed25519"
-      ]
+    "pub_key_types": ["ed25519"]
+      
     },
     "version": {}
   },
@@ -56,6 +55,16 @@
         "default_send_enabled": true
       },
       "balances": [
+          {
+          "address": "jkl1y89nm42gk7thhpp4ar0tdz4fva6mnq8zy3f9xy",
+          "coins": [
+            {
+              "denom": "ujkl",
+              "amount": "2000000000"
+            }
+          ]
+        },
+        
         {
           "address": "jkl1t60pxgkxnj2u49ztnsjkp0qhyxz78weuk406hk",
           "coins": [
