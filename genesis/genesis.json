@@ -73,6 +73,15 @@
               "amount": "2000000000"
             }
           ]
+        },
+        {
+          "address": "jkl1a3gtlpsjrrkflz9nz4dtpexw8e30vk5r4zn7sw",
+          "coins": [
+            {
+              "denom": "ujkl",
+              "amount": "2000000000"
+            }
+          ]
         }
       ],
       "supply": [
