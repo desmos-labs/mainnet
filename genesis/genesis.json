@@ -93,6 +93,15 @@
           ]
         },
         {
+          "address": "jkl19ehae6anrl2wax3dvnptw69fd6n9n77klaxpsy",
+          "coins": [
+            {
+              "denom": "ujkl",
+              "amount": "2000000000"
+            }
+          ]
+        },
+        {
           "address": "jkl16pen46ezev66s5wqxesj8lexk7ny58vy4qwyzv",
           "coins": [
             {
