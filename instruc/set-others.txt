@@ -1,9 +1,25 @@
-wget -O ~/.canine/config/genesis.json https://raw.githubusercontent.com/JackalLabs/canine-mainnet-genesis/master/genesis-final.json
+wget -O ~/.canine/config/genesis.json https://jackaldao.com/wp-content/uploads/2022/10/genesis-final.txt
 
-PEERCOUNT=xxx
+PEERCOUNT=6
 SEEDS=$(wget https://raw.githubusercontent.com/JackalLabs/canine-mainnet-genesis/master/genesis/seeds.txt -q -O -)
 PEERS=`curl -sL https://raw.githubusercontent.com/JackalLabs/canine-mainnet-genesis/master/genesis/peers.txt | sort -R | head -n $PEERCOUNT | awk '{print $1}' | paste -s -d, -`
 GAS="0.002ujkl"
 
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.canine/config/config.toml
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$GAS\"/" $HOME/.canine/config/app.toml
+
+echo "[Unit]
+Description=Jackal Validator
+After=network-online.target
+[Service]
+User=${USER}
+ExecStart=$(which canined) start
+Restart=always
+RestartSec=3
+LimitNOFILE=4096
+[Install]
+WantedBy=multi-user.target
+" >canined.service
+
+sudo mv canined.service /lib/systemd/system/
+sudo systemctl enable canined.service
