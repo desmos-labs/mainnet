@@ -8,7 +8,7 @@ canined keys add $WALLETALIAS
 
 wget -O ~/.canine/config/genesis.json https://raw.githubusercontent.com/JackalLabs/canine-mainnet-genesis/main/genesis/genesis.json
 
-canined add-genesis-account $(canined keys show -a $WALLETALIAS) 2000000000ujkl
+canined add-genesis-account $(canined keys show -a $WALLETALIAS) 4000000000ujkl
 
 canined gentx $WALLETALIAS 3225806451ujkl \
 --chain-id=$CHAIN \
