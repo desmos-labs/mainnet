@@ -9,7 +9,7 @@ sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persi
 sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"$GAS\"/" $HOME/.canine/config/app.toml
 
 echo "[Unit]
-Description=Jackal Validator
+Description=Jackal Node
 After=network-online.target
 [Service]
 User=${USER}

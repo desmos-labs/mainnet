@@ -1,4 +1,4 @@
-CHAIN="canine-1"
+CHAIN="jackal-1"
 WALLETALIAS="REPLACE_ME"
 MONIKER="REPLACE_ME"
 
@@ -10,7 +10,7 @@ wget -O ~/.canine/config/genesis.json https://raw.githubusercontent.com/JackalLa
 
 canined add-genesis-account $(canined keys show -a $WALLETALIAS) 2000000000ujkl
 
-canined gentx $WALLETALIAS 1666666666ujkl \
+canined gentx $WALLETALIAS 3225806451ujkl \
 --chain-id=$CHAIN \
 --moniker="$MONIKER" \
 --commission-max-change-rate=0.01 \
