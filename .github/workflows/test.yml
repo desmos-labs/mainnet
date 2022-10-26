@@ -49,7 +49,7 @@ jobs:
         run: |
           canined init node
           cp genesis/genesis.json ~/.canine/config/genesis.json
-          cp -a gentx/. ~/.canine/config/gentx/
+          cp -a gentxs/. ~/.canine/config/gentx/
           canined collect-gentxs
 
       - name: Validate genesis ✅
