@@ -156,7 +156,7 @@ wss://ws.mainnet.desmos.network:443
 
 ### gRPC
 ```
-https://api.mainn.desmos.network:443
+https://api.mainnet.desmos.network:443
 ```
 
 ### Legacy APIs
